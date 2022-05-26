@@ -12,9 +12,8 @@ import locale
 # Set the general graph parameters
 locale.setlocale(locale.LC_NUMERIC, 'de_DE.UTF-8')  # Set comma for decimals
 plt.rcParams['axes.formatter.use_locale'] = True
-sns.set_style('whitegrid')  # Set the graph grid to white
 sns.set(rc={'text.usetex': True})  # Turn on the LaTeX interpreter
-
+sns.set_style('whitegrid')  # Set the graph grid to white
 
 def create_fancy_graph(df, y1, y2=None, y1label='Grote pendulum',
                        y2label='Kleine pendulum', save_fig=False,
