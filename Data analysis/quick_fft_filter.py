@@ -43,8 +43,8 @@ def quick_plot(t, f, ffilt, L, freq, PSD, PSDclean, save_fig=False,
     plt.plot(freq[L], PSD[L], color='c', lw=2, label='Noisy')
     plt.plot(freq[L], PSDclean[L], color='k', lw=1.5, label='Filtered')
     plt.xlim(freq[L[0]], freq[L[-1]])
-    plt.ylim([0, 250])
-    plt.xlim([0, 250000])
+    plt.ylim([0, 12])
+    plt.xlim([0, 10])
     plt.xlabel('Frequency (Hz)')
     plt.ylabel('Amplitude (-)')
     plt.grid(True)
@@ -94,13 +94,19 @@ def quick_process(df, samplerate, timestamp='Time (s)', col='Sensor (V)',
 
 if __name__ == '__main__':
     # Load the data
-    filename = 'drip_lazer_500000Hz.csv'
-    df = pd.read_csv(filename, index_col=0).iloc[100:, :]
+    from random import randint
+    x = np.linspace(0, 60, 6 * 10 ** 3)
+    noise = (randint(0, 10) * np.sin(2*np.pi*randint(0,2)*x) + \
+        randint(0, 10) * np.sin(2*np.pi*randint(0,2)*x) + \
+        randint(0, 10) * np.sin(2*np.pi*randint(0,2)*x))
+    y = 3 * np.sin(2*np.pi*4*x) + noise
+                
 
     # Get the sampelrate and timestamp
-    samplerate = int(filename.split('_')[-1:][0].split('H')[:-1][0])
-    df['Time (s)'] = create_timestamp(len(df['Sensor (V)']), samplerate)
+    samplerate = 60 / (6 * 10 ** 3)
+    df = pd.DataFrame([x, y]).transpose()
+    df.columns = ['Time (s)', 'Sensor (V)']
 
     # Process the data
     quick_process(df, samplerate, timestamp='Time (s)', col='Sensor (V)',
-                  PSD_cutoff=0, f_cutoff=10000)
+                  PSD_cutoff=None, f_cutoff=10000)
