@@ -10,22 +10,10 @@ import threading
 import time
 
 
-def good_worker():
-    print("[GoodWorker] Starting")
-    time.sleep(4)
-    print("[GoodWorker] all good")
-
-
-def bad_worker():
-    print("[BadWorker] Starting")
-    time.sleep(2)
-    raise Exception("ups!")
-
-
 class MyProcManager(object):
     """
     Class to manage processes that are prone to errors.
-    
+
     When a process crashes all the other processes managed by the manager
     will be terminated cleanly.
     """
@@ -69,17 +57,27 @@ class MyProcManager(object):
 
 
 if __name__ == '__main__':
+    def good_worker():
+        print("[GoodWorker] Starting")
+        time.sleep(4)
+        print("[GoodWorker] all good")
+
+    def bad_worker():
+        print("[BadWorker] Starting")
+        time.sleep(2)
+        raise Exception("ups!")
+
     # Create the manager
     proc_manager = MyProcManager()
-    
+
     # Add some workers
     proc_manager.launch_proc(good_worker)
     proc_manager.launch_proc(good_worker)
     proc_manager.launch_proc(bad_worker)
-    
+
     # Wait for all the workers to finish
     proc_manager.wait()
-    
+
     # Check if there were errors
     if proc_manager.errors_flag:
         print("Errors flag is set: some process crashed")

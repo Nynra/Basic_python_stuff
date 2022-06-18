@@ -3,17 +3,21 @@ Created on Mon Mar 15 18:04:13 2021.
 
 @author: baskl
 """
-import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import locale
 
-# Set the general graph parameters
-locale.setlocale(locale.LC_NUMERIC, 'de_DE.UTF-8')  # Set comma for decimals
-plt.rcParams['axes.formatter.use_locale'] = True
-sns.set(rc={'text.usetex': True})  # Turn on the LaTeX interpreter
-sns.set_style('whitegrid')  # Set the graph grid to white
+
+def set_aestetics():
+    """Set the graph aestetics to fancy."""
+    # Set the general graph parameters
+    # Set comma for decimals
+    locale.setlocale(locale.LC_NUMERIC, 'de_DE.UTF-8')
+    plt.rcParams['axes.formatter.use_locale'] = True
+    sns.set(rc={'text.usetex': True})  # Turn on the LaTeX interpreter
+    sns.set_style('whitegrid')  # Set the graph grid to white
+
 
 def create_fancy_graph(df, y1, y2=None, y1label='Grote pendulum',
                        y2label='Kleine pendulum', save_fig=False,
@@ -69,6 +73,7 @@ def create_fancy_graph(df, y1, y2=None, y1label='Grote pendulum',
 
 
 if __name__ == '__main__':
+    import os
     # Echo all the measurement folder names to the user and as wich one
     # should be analysed
     content = os.listdir(os.getcwd())
