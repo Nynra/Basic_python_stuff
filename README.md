@@ -1,3 +1,5 @@
 # Basic_RPI_stuff
-#repo
-Some basic scripts that are usefull on a fresh install for RPI. The goal is to only have to install git and clone the repo, run the setup and be done
+#data_analysis #multiprocessing #multithreading #opencv
+Some usefull python scripts for routine tasks on the RPI. This repository is
+by no means meant for publication and has a lot of buggs. Any advice on 
+improving is welcome, but weird because this repository is private
