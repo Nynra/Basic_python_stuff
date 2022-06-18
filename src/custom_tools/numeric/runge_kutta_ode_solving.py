@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun May 29 13:19:52 2022
+Created on Sun May 29 13:19:52 2022.
 
 @author: baskl
 """
@@ -8,7 +8,7 @@ import numpy as np
 
 
 def euler(x, f, f0):
-    """The Euler solving method."""
+    """Use the Euler solving method."""
     return first_order_runge_kutta(x, f, f0)
 
 

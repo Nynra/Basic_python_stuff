@@ -5,3 +5,5 @@
   sudo nano /boot/config.txt
 - Create a venv
   https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/ 
+- Generating requirements file
+  https://learnpython.com/blog/python-requirements-file/
