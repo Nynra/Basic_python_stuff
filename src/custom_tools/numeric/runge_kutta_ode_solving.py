@@ -8,12 +8,33 @@ import numpy as np
 
 
 def euler(x, f, f0):
-    """Use the Euler solving method."""
+    """
+    Use the Euler solving method.
+
+    Just a wrapper for the first order Runge Kutta method.
+    """
     return first_order_runge_kutta(x, f, f0)
 
 
 def first_order_runge_kutta(t, f, f0):
-    """Calculate firs order runge kutta estimation of the given fuinction."""
+    """
+    Calculate firs order runge kutta estimation of the given fuinction.
+
+    Parameters
+    ----------
+    t : np.array
+        Numpy array containing the timestamp in float.
+    f : function object
+        Function object representing the equation that shoult be solved.
+    f0 : floar
+        The initial condition of the given function.
+
+    Returns
+    -------
+    xpoints : np.array
+        Numpy array containing the numeric data representing the solved
+        equation.
+    """
     # Initial parameters
     a = t[0]
     b = t[-1]
@@ -30,7 +51,24 @@ def first_order_runge_kutta(t, f, f0):
 
 
 def second_order_runge_kutta(t, f, f0):
-    """Calculate second order runge kutta estimation of the given fuinction."""
+    """
+    Calculate second order runge kutta estimation of the given fuinction.
+
+    Parameters
+    ----------
+    t : np.array
+        Numpy array containing the timestamp in float.
+    f : function object
+        Function object representing the equation that shoult be solved.
+    f0 : floar
+        The initial condition of the given function.
+
+    Returns
+    -------
+    xpoints : np.array
+        Numpy array containing the numeric data representing the solved
+        equation.
+    """
     # Initial parameters
     a = t[0]
     b = t[-1]
@@ -49,7 +87,24 @@ def second_order_runge_kutta(t, f, f0):
 
 
 def fourth_order_runge_kutta(t, f, f0):
-    """Calculate fourth order runge kutta estimation of the given fuinction."""
+    """
+    Calculate fourth order runge kutta estimation of the given fuinction.
+
+    Parameters
+    ----------
+    t : np.array
+        Numpy array containing the timestamp in float.
+    f : function object
+        Function object representing the equation that shoult be solved.
+    f0 : floar
+        The initial condition of the given function.
+
+    Returns
+    -------
+    xpoints : np.array
+        Numpy array containing the numeric data representing the solved
+        equation.
+    """
     # Initial parameters
     a = t[0]
     b = t[-1]

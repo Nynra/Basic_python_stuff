@@ -11,28 +11,34 @@ t = Symbol('t')
 
 
 def Heaviside(arg):
-    ''' Heaviside die ook op arg=0 gedefinieerd is.'''
+    """Heavidide function that is defined for arg=0."""
     return Piecewise((0, arg < 0), (1, arg >= 0))
 
 
 # functies om de fourier-reeks coefficienten uit te rekenen
 def an(f, T, n, omega0):
+    """Calculate the a of the fourrier component."""
     return 2 / T * integrate(f * cos(n * omega0 * t), (t, 0, T))
 
 
 def bn(f, T, n, omega0):
+    """Calculate the b of a forrier component."""
     return 2 / T * integrate(f * sin(n * omega0 * t), (t, 0, T))
 
 
 def a0(f, T, omega0):
+    """Calculate the first forrier component."""
     return 1 / T * integrate(f, (t, 0, T)).nsimplify()
 
 
 def ac(f, T, n, omega0):
-    return 1 / T * integrate(f * exp(-S.ImaginaryUnit * n * omega0 * t), (t, -T / 2, T / 2)).nsimplify()
+    """Calculate the fourrier component in complex form."""
+    return (1 / T * integrate(f * exp(-S.ImaginaryUnit * n * omega0 * t),
+                              (t, -T / 2, T / 2)).nsimplify())
 
 
-def fourreeks(f, T, N):
+def fourseries(f, T, N):
+    """Create the forrier series of the given function."""
     N += 1  # voor Maple
     a = (N - 1) * [0]
     b = (N - 1) * [0]
@@ -49,7 +55,7 @@ def fourreeks(f, T, N):
     return som, a, b
 
 
-def cfourreeks(f, T, N):
+def cfourseries(f, T, N):
     ''' Let op! Periode tussen -T/2 en T/2!  '''
     N += 1
     omega0 = 2 * pi / T
@@ -77,6 +83,7 @@ def cfourreeks(f, T, N):
 
 
 def spec(a, b, T):
+    """Return the amplitude and phase spectrum of the given components."""
     omega0 = 2 * pi / T
     mag = [nfloat(sqrt(a[i]**2 + b[i]**2)) for i in range(len(a))]
     phi = len(a) * [0]
@@ -93,7 +100,7 @@ def spec(a, b, T):
     return (mag, phi)
 
 
-def periodiek(f, T, N):
+def periodic(f, T, N):
     som = S(0)
     for n in range(N):
         som += (Heaviside(t - n * T) - Heaviside(t - (n + 1) * T)) * \
@@ -116,10 +123,10 @@ if __name__ == '__main__':
     T = 3
     N = 10
     teind = 10
-    som, a, b = fourreeks(f, T, N)
+    som, a, b = fourseries(f, T, N)
     mag, phase = spec(a, b, T)
     plot(som, (t, 0, teind))
-    p = plot(periodiek(f, T, int(teind / T) + 1), som,
+    p = plot(periodic(f, T, int(teind / T) + 1), som,
              (t, 0, teind), adaptive=False, show=False)
     plot_color(p)
     p.show()

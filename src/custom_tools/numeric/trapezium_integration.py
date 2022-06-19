@@ -12,7 +12,7 @@ def trap_error_array(x, y, xerr, yerr):
     Calculate the most likely error and surface when is numericly integrated.
 
     Calculate the most likely error when the the data is numerically integrated
-    using the trapezium method
+    using the trapezium method.
 
     Parameters
     ----------

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "custom_tools"
-version = "0.0.4-alpha"
+version = "0.0.4-alpha-2"
 description = "This package contains some usefull python code for rpi."
 readme = "README.md"
 license = {text = "BSD 3-Clause License"}
