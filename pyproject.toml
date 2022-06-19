@@ -3,8 +3,8 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "basic_rpi_stuff"
-version = "0.0.2-alpha"
+name = "custom_tools"
+version = "0.0.4-alpha"
 description = "This package contains some usefull python code for rpi."
 readme = "README.md"
 license = {text = "BSD 3-Clause License"}
@@ -13,11 +13,8 @@ classifiers = [
 ]
 dependencies = [
     "pandas", "numpy", "sympy", "matplotlib", "seaborn",
-    "multiprocessing", "threading", "traceback", "functools",
-    "logging",
     'importlib-metadata; python_version<"3.8"',
 ]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["mypackage*"]
