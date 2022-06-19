@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "custom_tools"
-version = "0.0.4-alpha-2"
+version = "0.1.0"
 description = "This package contains some usefull python code for rpi."
 readme = "README.md"
 license = {text = "BSD 3-Clause License"}
@@ -13,6 +13,7 @@ classifiers = [
 ]
 dependencies = [
     "pandas", "numpy", "sympy", "matplotlib", "seaborn",
+    "sklearn", "mpl_toolkits",
     'importlib-metadata; python_version<"3.8"',
 ]
 
