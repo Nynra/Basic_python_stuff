@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-# Load the dataset
-# ----------------
-# We will start by loading the `digits` dataset. This dataset contains
-# handwritten digits from 0 to 9. In the context of clustering, one would like
-# to group images such that the handwritten digits on the image are the same.
+# -*- coding: utf-8 -*-.
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
@@ -12,23 +7,25 @@ import numpy as np
 import pandas as pd
 
 
-def get_metrics(name, k_means_model, test_data, labels=None):
+def get_metrics(name, k_means_model, test_data, labels=None, 
+                print_results=True):
     """Get some metrics on the current cluster model."""
     # Define the metrics which require only the true labels and estimator
     # labels
-# =============================================================================
-#     clustering_metrics = [
-#         metrics.homogeneity_score,
-#         metrics.completeness_score,
-#         metrics.v_measure_score,
-#         metrics.adjusted_rand_score,
-#         metrics.adjusted_mutual_info_score,
-#     ]
-#     results = [m(labels, kmeans.labels_) for m in clustering_metrics]
-# =============================================================================
+    if labels is None:
+        results = []
+    else:
+        clustering_metrics = [
+            metrics.homogeneity_score,
+            metrics.completeness_score,
+            metrics.v_measure_score,
+            metrics.adjusted_rand_score,
+            metrics.adjusted_mutual_info_score,
+        ]
+        results = [m(labels, kmeans.labels_) for m in clustering_metrics]
 
     # The silhouette score requires the full dataset
-    results = [
+    results += [
         metrics.silhouette_score(
             data,
             kmeans.labels_,
@@ -38,20 +35,19 @@ def get_metrics(name, k_means_model, test_data, labels=None):
     ]
 
     # Collect the results in a dict
-# =============================================================================
-#     formatted_results = {'init': name,
-#                          'homo': round(results[0], 3),
-#                          'compl': round(results[1], 3),
-#                          'v-meas': round(results[2], 3),
-#                          'ARI': round(results[3], 3),
-#                          'AMI': round(results[4], 3),
-#                          'silhouette': round(results[5], 3)}
-# =============================================================================
-    # Collect the results in a dict
-    formatted_results = {'init': name,
-                         'silhouette': round(results[0], 3)}
-    for key in formatted_results:
-        print('{}: {}'.format(key, formatted_results[key]))
+    formatted_results = {}
+    formatted_results['init'] = name
+    formatted_results['silhouette'] = round(results[0], 3)
+    if labels is not None:
+        formatted_results['homo'] = round(results[0], 3)
+        formatted_results['compl'] = round(results[1], 3)
+        formatted_results['v-meas'] = round(results[2], 3)
+        formatted_results['ARI'] = round(results[3], 3)
+        formatted_results['AMI'] = round(results[4], 3)
+
+    if print_results:
+        for key in formatted_results:
+            print('{}: {}'.format(key, formatted_results[key]))
     return formatted_results
 
 
