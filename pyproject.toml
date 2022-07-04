@@ -7,6 +7,8 @@ name = "custom_tools"
 version = "0.1.0"
 description = "This package contains some usefull python code for rpi."
 readme = "README.md"
+authors = "Nynra"
+maintainers = "Nynra"
 license = {text = "BSD 3-Clause License"}
 classifiers = [
     "Programming Language :: Python :: 3",
