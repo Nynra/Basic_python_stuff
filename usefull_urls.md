@@ -7,3 +7,7 @@
   https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/ 
 - Generating requirements file
   https://learnpython.com/blog/python-requirements-file/
+- Building wheel file with .toml
+  https://lynn-kwong.medium.com/how-to-configure-build-and-deploy-your-python-projects-to-pypi-dac40803fdf
+- How to create and run a bash file
+  https://taniarascia.com/how-to-create-and-use-bash-scripts/
