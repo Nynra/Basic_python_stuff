@@ -9,7 +9,7 @@ import threading
 import time
 
 
-class RepeatedTimer(object):
+class Repeated_timer(object):
     """Class to repeat a task every x seconds."""
 
     def __init__(self, interval, function, *args, **kwargs):
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     print("starting...")
     # it auto-starts, no need of rt.start()
-    rt = RepeatedTimer(1, hello, "World")
+    rt = Repeated_timer(1, hello, "World")
     try:
         sleep(10)  # your long-running job goes here...
     finally:
