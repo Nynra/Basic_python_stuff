@@ -13,8 +13,58 @@ SENTINEL = 'SENTINEL'
 EOM_CHAR = 'EOM'
 
 
-def read_pipe(child_conn, feedback=False):
-    """Read the data from the pipe."""
+def poll_pipe(conn):
+    """Check if there is a message waiting."""
+    try:
+        state = conn.poll()
+    except OSError:
+        return None
+    return state
+
+
+def read_pipe_msg(conn):
+    """
+    Read the data from the pipe.
+
+    Parameters
+    ----------
+    conn : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    msg : unknown
+        The message that was waiting in the Pipe.
+
+    """
+    try:
+        # Get the event
+        msg = conn.recv()
+    except OSError:
+        # Catch the error if the other side closes unexpected
+        close_pipe(conn)
+        msg = None
+        print('OSError received from pipe')
+    return msg
+
+
+def read_pipe_list(child_conn, feedback=False):
+    """
+    Read the data from the pipe.
+
+    Parameters
+    ----------
+    child_conn : multiprocessing.Pipe connector
+    feedback : bool, optional
+        Boolean indicating if the reader should send a conformation to the 
+        sender or not. The default is False.
+
+    Returns
+    -------
+    result : list
+        List containing all the data that was waiting in the Pipe.
+
+    """
     result = []
     try:
         # Check if there is a message ready
@@ -26,6 +76,7 @@ def read_pipe(child_conn, feedback=False):
     except OSError:
         # Catch the error if the other side closes unexpected
         close_pipe(child_conn)
+        print("OSError received from pipe.")
         return result
 
     if feedback:
@@ -56,7 +107,7 @@ def write_pipe(conn, data):
 if __name__ == '__main__':
     # Example usage
     parent_conn, child_conn = Pipe()  # default is duplex!
-    update_data_process = Process(target=read_pipe, args=(child_conn,
+    update_data_process = Process(target=read_pipe_list, args=(child_conn,
                                                           True,))
     update_data_process.daemon = True
     update_data_process.start()
