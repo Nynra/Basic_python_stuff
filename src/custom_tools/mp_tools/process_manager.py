@@ -60,6 +60,7 @@ if __name__ == '__main__':
     def good_worker():
         print("GoodWorker Starting")
         time.sleep(4)
+        print("GoodWorker Finished")
 
     def bad_worker():
         print("[BadWorker] Starting")
@@ -71,8 +72,8 @@ if __name__ == '__main__':
 
     # Add some workers
     proc_manager.launch_proc(good_worker)
-    # proc_manager.launch_proc(good_worker)
-    # proc_manager.launch_proc(bad_worker)
+    proc_manager.launch_proc(good_worker)
+    proc_manager.launch_proc(bad_worker)
 
     # Wait for all the workers to finish
     proc_manager.wait()
