@@ -49,6 +49,8 @@ class Process_manager(object):
         if p.exitcode > 0:
             self.errors_flag = True
             self.terminate_all()
+        else:
+            self.procs.remove(p)
 
     def wait(self):
         """Wait for all the threads to finish."""
